@@ -28,8 +28,11 @@ int socket_connect(char *host, int portno) {
     if (sockfd < 0) DebugMessage(M64MSG_ERROR, "ERROR opening socket");
 
     /* lookup the ip address */
-    server = gethostbyname("127.0.0.1");
-    if (server == NULL) DebugMessage(M64MSG_ERROR, "ERROR, no such host '%s'", host);
+    server = gethostbyname(host);
+    if (server == NULL){
+        DebugMessage(M64MSG_ERROR, "ERROR, no such host '%s'", host);
+        DebugMessage(M64MSG_ERROR, "h_errno: %d", h_errno);
+    }
 
     /* fill in the structure */
     memset(&serv_addr, 0, sizeof(serv_addr));
