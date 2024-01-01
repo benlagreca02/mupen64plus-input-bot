@@ -30,8 +30,8 @@ int socket_connect(char *host, int portno) {
     /* lookup the ip address */
     server = gethostbyname(host);
     if (server == NULL){
+        DebugMessage(M64MSG_INFO, "h_errno: %d", h_errno);
         DebugMessage(M64MSG_ERROR, "ERROR, no such host '%s'", host);
-        DebugMessage(M64MSG_ERROR, "h_errno: %d", h_errno);
     }
 
     /* fill in the structure */
